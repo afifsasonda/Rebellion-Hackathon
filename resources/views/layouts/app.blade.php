@@ -8,9 +8,22 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        {{-- <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
         {{-- <link rel="stylesheet" href="/resources/css/app.css"> --}}
+
+        <meta charset="utf-8">
+
+        <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/css/plugins/choices.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/css/plugins/datatable.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/css/plugins/daterangepicker.css" />
+        <link rel="stylesheet" href="https://github.com/Loopple/loopple-public-assets/blob/main/riva-dashboard-tailwind/css/plugins/flatpickr.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/css/plugins/paginate.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/riva-dashboard-tailwind/css/plugins/jsvectormap.min.css" />
+        <link rel="stylesheet" href="{{ asset('./assets/css/theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('./assets/css/loopple.css') }}">
 
         <!-- Scripts -->
         @vite(['resources/css/main.css', 'resources/js/app.js'])

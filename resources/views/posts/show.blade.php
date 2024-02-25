@@ -11,23 +11,23 @@
                 <div class="p-6 text-gray-900">
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">{{ 'Title' }}</h2>
-                        <p class="mt-1 text-sm text-gray-600">{{ $post->title }}</p>
+                        <p class="mt-1 text-sm text-gray-600">{{ $posts->title }}</p>
                     </div>
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">{{ 'Content' }}</h2>
-                        <p class="mt-1 text-sm text-gray-600">{{ $post->content }}</p>
+                        <p class="mt-1 text-sm text-gray-600">{{ $posts->content }}</p>
                     </div>
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">{{ 'Featured Image' }}</h2>
-                        <p class="mt-1 text-sm text-gray-600"><img src="{{ Storage::url($post->featured_image ) }}" class="h-64 w-128" alt="{{ $post->title }}"></p>
+                        <p class="mt-1 text-sm text-gray-600"><img src="{{ Storage::url($posts->featured_image ) }}" class="h-64 w-128" alt="{{ $posts->title }}"></p>
                     </div>
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">{{ 'Created At' }}</h2>
-                        <p class="mt-1 text-sm text-gray-600">{{ $post->created_at }}</p>
+                        <p class="mt-1 text-sm text-gray-600">{{ $posts->created_at }}</p>
                     </div>
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">{{ 'Updated At' }}</h2>
-                        <p class="mt-1 text-sm text-gray-600">{{ $post->updated_at }}</p>
+                        <p class="mt-1 text-sm text-gray-600">{{ $posts->updated_at }}</p>
                     </div>
                     <a href="{{ route('posts.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">BACK</a>
                 </div>
