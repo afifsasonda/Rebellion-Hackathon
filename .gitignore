@@ -17,3 +17,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+database/migrations/2024_02_25_140229_create_relasi.php
