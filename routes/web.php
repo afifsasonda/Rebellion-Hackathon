@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AktivitasController;
+use App\Http\Controllers\BerandaprofileController;
+use App\Http\Controllers\JenisketerampilanController;
+use App\Http\Controllers\JenispengalamanController;
+use App\Http\Controllers\KeterampilanController;
+use App\Http\Controllers\PengalamanController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +35,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('posts',PostController::class);
+    Route::resource('pengalaman',PengalamanController::class);
+    Route::resource('aktivitas',AktivitasController::class);
+    Route::resource('keterampilan',KeterampilanController::class);
+    Route::resource('jenis-pengalaman',JenispengalamanController::class);
+    Route::resource('jenis-keterampilan',JenisketerampilanController::class);
 });
 
 require __DIR__.'/auth.php';

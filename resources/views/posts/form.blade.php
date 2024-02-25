@@ -12,7 +12,7 @@
                     <form action="{{ isset($post)? route('posts.update', $post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data" class="mt-6 space-y-6">
                         @csrf
                         @isset($post)
-                        @method('put')
+                            @method('put')
                         @endisset
 
                         <div>
@@ -34,7 +34,8 @@
                                 file:rounded-full file:border-0
                                 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700
-                                hover:file:bg-violet-100" />
+                                hover:file:bg-violet-100"
+                                />
                             </label>
                             <div class="shrink-0 my-2">
                                 <img id="featured_image_preview" class="h-64 w-128 object-cover rounded-md" src="{{ isset($post) ? Storage::url($post->featured_image) : '' }}" alt="Featured image preview">

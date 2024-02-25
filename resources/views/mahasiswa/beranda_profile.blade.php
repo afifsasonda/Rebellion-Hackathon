@@ -1,16 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ ('Profile') }}
-            </h2>
-            <a href="{{ route('posts.create') }}" class="bg-blue-500 text-white p-2">{{ ('add') }}</a>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ ('Profile') }}
+        </h2>
+        {{-- <a href="{{ route('posts.create') }}" class="bg-blue-500 text-white p-2"></a> --}}
     </x-slot>
 
-
-    {{-- <div class="py-2">
-        <div class="max-w-7xl mx-auto h-auto sm:px-6 lg:px-8">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <table class="border-collapse table-auto w-full text-sm">
@@ -35,7 +32,7 @@
                                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('delete')
-                                        <button class="border border-red-300 hover:border-red-500 hover:text-gray-400 px-4 py-2 rounded-md">DELETE</button>
+                                        <button class="border border-red-300 hover:border-red-500 hover:text-white px-4 py-2 rounded-md">DELETE</button>
                                     </form>
                                 </td>
                             </tr>
@@ -46,8 +43,5 @@
                 </div>
             </div>
         </div>
-    </div> --}}
-
-
-
+    </div>
 </x-app-layout>

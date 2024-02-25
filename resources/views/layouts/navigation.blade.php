@@ -17,8 +17,9 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                        {{ ('Posts') }}
+                        {{ ('Profile') }}
                     </x-nav-link>
+
                 </div>
             </div>
 
@@ -75,7 +76,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
-                {{ ('Posts') }}
+                {{ ('Profile') }}
             </x-responsive-nav-link>
         </div>
 

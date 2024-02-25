@@ -20,6 +20,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'prodi',
+        'avatar',
+        'alamat',
+        'pengalaman_id',
+        'aktivitas_id',
+        'keterampilan_id',
+        'phone',
+        'description',
         'password',
     ];
 
@@ -42,4 +50,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function pengalamans(){
+        return $this->hasMany(Pengalaman::class,'pengalaman_id','id');
+    }
+
+    public function ativitass(){
+        return $this->hasMany(Aktivitas::class,'aktivitas_id','id');
+    }
+
+    public function keterampilans(){
+        return $this->hasMany(Keterampilan::class,'keterampilan_id','id');
+    }
 }

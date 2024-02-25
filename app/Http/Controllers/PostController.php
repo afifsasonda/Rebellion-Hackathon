@@ -7,7 +7,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
-
+use App\Models\User;
 
 use function Pest\Laravel\post;
 
@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response()->view('posts.index',['posts'=> Post::orderBy('updated_at','desc')->get()]);
+        return response()->view('posts.index',['posts'=> User::orderBy('updated_at','desc')->get()]);
     }
 
     /**
@@ -37,7 +37,7 @@ class PostController extends Controller
         $validated = $request->validated();
 
         if($request->hashFile('featured_image')){
-            $filePath = Storage::disk('public')->put('images/posts/featured-image', request()->file('featured_image'));
+            $filePath = Storage::disk('public')->put('images/user/featured_image', request()->file('featured_image'));
             $validated['featured_image'] = $filePath;
         }
 
@@ -55,7 +55,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        return response()->view('posts.show',['posts'=> Post::findOrFail($id),]);
+        return response()->view('posts.show',['posts'=> User::findOrFail($id),]);
     }
 
     /**
