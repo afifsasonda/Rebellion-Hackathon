@@ -52,14 +52,14 @@ class User extends Authenticatable
     ];
 
     public function pengalamans(){
-        return $this->hasMany(Pengalaman::class,'pengalaman_id','id');
+        return $this->belongsToMany(Pengalaman::class, 'relasi_pengalaman', 'user_id', 'pengalaman_id');
     }
 
     public function ativitass(){
-        return $this->hasMany(Aktivitas::class,'aktivitas_id','id');
+        return $this->belongsToMany(Aktivitas::class,'relasi_aktivitas','user_id','id');
     }
 
     public function keterampilans(){
-        return $this->hasMany(Keterampilan::class,'keterampilan_id','id');
+        return $this->belongsToMany(Keterampilan::class,'relasi_keterampilan','user_id','keterampilan_id');
     }
 }

@@ -18,7 +18,7 @@ class Pengalaman extends Model
     ];
 
     public function users(){
-        return $this->hasMany(User::class,'pengalaman_id','id');
+        return $this->belongsToMany(User::class,'relasi_pengalaman','pengalaman_id','user_id');
     }
 
     public function jenispengalamans(){
