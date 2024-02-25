@@ -15,7 +15,7 @@ class Keterampilan extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class,'keterampilan_id','id');
+        return $this->belongsToMany(User::class,'relasi_keterampilan_id','keterampilan_id','user_id');
     }
 
     public function jenisketerampilans(){
