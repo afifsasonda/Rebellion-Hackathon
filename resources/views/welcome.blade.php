@@ -56,6 +56,7 @@
                     berinteraksi, berjejaring, dan berkolaborasi satu sama lain dalam konteks Penelitian, Pembinaan Wirausaha, pengabdian Masyarakat,
                     maupun Profesional Kerjasama dalam lingkup Prodi Informatika.
                 </p>
+                
                 <div class="flex flex-col items-center gap-4 lg:flex-row">
                     <button class="flex items-center py-4 text-sm font-bold text-white px-7 bg-black hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 transition duration-300 rounded-xl">Get started now</button>
                     <button class="flex items-center py-4 text-sm font-medium px-7 text-dark-grey-700 hover:text-dark-grey-900 transition duration-300 rounded-2xl">
