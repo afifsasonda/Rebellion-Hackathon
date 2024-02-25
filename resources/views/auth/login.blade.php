@@ -151,12 +151,22 @@
                                 <div class="mb-10">
                                     <h1 class="text-3xl font-extrabold uppercase !leading-snug text-primary md:text-4xl">Sign in</h1>
                                     <p class="text-base font-bold leading-normal text-white-dark">Enter your email and password to login</p>
-                                </div>
-                                <form class="space-y-5 dark:text-white" @submit.prevent="window.location='index.html'">
+                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     <div>
-                                        <label for="Email">Email</label>
+    <button type="button" class="btn btn-danger" @click="coloredToast('danger')">Danger</button>
+    <div id="danger-toast"></div>
+    <!-- script -->
+
+</div>
+                                </div>
+                                <form class="space-y-5 dark:text-white" method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div>
+                                        <label for="email">Email</label>
                                         <div class="relative text-white-dark">
-                                            <input id="Email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" />
+                                            <input id="email" name="email" type="email" placeholder="Enter Email" class="form-input ps-10 placeholder:text-white-dark" value="{{ old('email') }}" />
+                                            <br>
+
                                             <span class="absolute start-4 top-1/2 -translate-y-1/2">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                                                     <path
@@ -176,7 +186,8 @@
                                         <label for="Password">Password</label>
                                         <div class="relative text-white-dark">
                                             <input
-                                                id="Password"
+                                                id="password"
+                                                name="password"
                                                 type="password"
                                                 placeholder="Enter Password"
                                                 class="form-input ps-10 placeholder:text-white-dark"
@@ -452,5 +463,290 @@
                 }));
             });
         </script>
+
+        <script>
+            showMessage = (msg = 'Example notification text.', position = 'bottom-start', showCloseButton = true, closeButtonHtml = '', duration = 3000) => {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: position || 'bottom-start',
+                    showConfirmButton: false,
+                    timer: duration,
+                    showCloseButton: showCloseButton,
+                });
+                toast.fire({
+                    title: msg,
+                });
+            };
+
+            clickCallable = () => {
+                new window.Swal({
+                    toast: true,
+                    position: 'bottom-start',
+                    text: 'Custom callback when action button is clicked.',
+                    showCloseButton: true,
+                    showConfirmButton: false,
+                    // confirmButtonText: 'Delete',
+                }).then((result) => {
+                    new window.Swal({
+                        toast: true,
+                        position: 'bottom-start',
+                        text: 'Thanks for clicking the Dismiss button!',
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                    });
+                });
+            };
+
+            coloredToast = (color) => {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'bottom-start',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    showCloseButton: true,
+                    animation: false,
+                    customClass: {
+                        popup: `color-${color}`,
+                    },
+                    target: document.getElementById(color + '-toast'),
+                });
+                toast.fire({
+                    title: 'Example notification text.',
+                });
+            };
+
+            document.addEventListener('alpine:init', () => {
+                // main section
+                Alpine.data('scrollToTop', () => ({
+                    showTopButton: false,
+                    init() {
+                        window.onscroll = () => {
+                            this.scrollFunction();
+                        };
+                    },
+
+                    scrollFunction() {
+                        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                            this.showTopButton = true;
+                        } else {
+                            this.showTopButton = false;
+                        }
+                    },
+
+                    goToTop() {
+                        document.body.scrollTop = 0;
+                        document.documentElement.scrollTop = 0;
+                    },
+                }));
+
+                // theme customization
+                Alpine.data('customizer', () => ({
+                    showCustomizer: false,
+                }));
+
+                // sidebar section
+                Alpine.data('sidebar', () => ({
+                    init() {
+                        const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
+                        if (selector) {
+                            selector.classList.add('active');
+                            const ul = selector.closest('ul.sub-menu');
+                            if (ul) {
+                                let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
+                                if (ele) {
+                                    ele = ele[0];
+                                    setTimeout(() => {
+                                        ele.click();
+                                    });
+                                }
+                            }
+                        }
+                    },
+                }));
+
+                // header section
+                Alpine.data('header', () => ({
+                    init() {
+                        const selector = document.querySelector('ul.horizontal-menu a[href="' + window.location.pathname + '"]');
+                        if (selector) {
+                            selector.classList.add('active');
+                            const ul = selector.closest('ul.sub-menu');
+                            if (ul) {
+                                let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
+                                if (ele) {
+                                    ele = ele[0];
+                                    setTimeout(() => {
+                                        ele.classList.add('active');
+                                    });
+                                }
+                            }
+                        }
+                    },
+
+                    notifications: [
+                        {
+                            id: 1,
+                            profile: 'user-profile.jpeg',
+                            message: '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
+                            time: '45 min ago',
+                        },
+                        {
+                            id: 2,
+                            profile: 'profile-34.jpeg',
+                            message: '<strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong>',
+                            time: '9h Ago',
+                        },
+                        {
+                            id: 3,
+                            profile: 'profile-16.jpeg',
+                            message: '<strong class="text-sm mr-1">Anna Morgan</strong>Upload a file',
+                            time: '9h Ago',
+                        },
+                    ],
+
+                    messages: [
+                        {
+                            id: 1,
+                            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-success-light dark:bg-success text-success dark:text-success-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>',
+                            title: 'Congratulations!',
+                            message: 'Your OS has been updated.',
+                            time: '1hr',
+                        },
+                        {
+                            id: 2,
+                            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-info-light dark:bg-info text-info dark:text-info-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>',
+                            title: 'Did you know?',
+                            message: 'You can switch between artboards.',
+                            time: '2hr',
+                        },
+                        {
+                            id: 3,
+                            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-danger-light dark:bg-danger text-danger dark:text-danger-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>',
+                            title: 'Something went wrong!',
+                            message: 'Send Reposrt',
+                            time: '2days',
+                        },
+                        {
+                            id: 4,
+                            image: '<span class="grid place-content-center w-9 h-9 rounded-full bg-warning-light dark:bg-warning text-warning dark:text-warning-light"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">    <circle cx="12" cy="12" r="10"></circle>    <line x1="12" y1="8" x2="12" y2="12"></line>    <line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>',
+                            title: 'Warning',
+                            message: 'Your password strength is low.',
+                            time: '5days',
+                        },
+                    ],
+
+                    languages: [
+                        {
+                            id: 1,
+                            key: 'Chinese',
+                            value: 'zh',
+                        },
+                        {
+                            id: 2,
+                            key: 'Danish',
+                            value: 'da',
+                        },
+                        {
+                            id: 3,
+                            key: 'English',
+                            value: 'en',
+                        },
+                        {
+                            id: 4,
+                            key: 'French',
+                            value: 'fr',
+                        },
+                        {
+                            id: 5,
+                            key: 'German',
+                            value: 'de',
+                        },
+                        {
+                            id: 6,
+                            key: 'Greek',
+                            value: 'el',
+                        },
+                        {
+                            id: 7,
+                            key: 'Hungarian',
+                            value: 'hu',
+                        },
+                        {
+                            id: 8,
+                            key: 'Italian',
+                            value: 'it',
+                        },
+                        {
+                            id: 9,
+                            key: 'Japanese',
+                            value: 'ja',
+                        },
+                        {
+                            id: 10,
+                            key: 'Polish',
+                            value: 'pl',
+                        },
+                        {
+                            id: 11,
+                            key: 'Portuguese',
+                            value: 'pt',
+                        },
+                        {
+                            id: 12,
+                            key: 'Russian',
+                            value: 'ru',
+                        },
+                        {
+                            id: 13,
+                            key: 'Spanish',
+                            value: 'es',
+                        },
+                        {
+                            id: 14,
+                            key: 'Swedish',
+                            value: 'sv',
+                        },
+                        {
+                            id: 15,
+                            key: 'Turkish',
+                            value: 'tr',
+                        },
+                        {
+                            id: 16,
+                            key: 'Arabic',
+                            value: 'ae',
+                        },
+                    ],
+
+                    removeNotification(value) {
+                        this.notifications = this.notifications.filter((d) => d.id !== value);
+                    },
+
+                    removeMessage(value) {
+                        this.messages = this.messages.filter((d) => d.id !== value);
+                    },
+                }));
+                //notifications
+                Alpine.data('form', () => ({
+                    // highlightjs
+                    codeArr: [],
+                    toggleCode(name) {
+                        if (this.codeArr.includes(name)) {
+                            this.codeArr = this.codeArr.filter((d) => d != name);
+                        } else {
+                            this.codeArr.push(name);
+
+                            setTimeout(() => {
+                                document.querySelectorAll('pre.code').forEach((el) => {
+                                    hljs.highlightElement(el);
+                                });
+                            });
+                        }
+                    },
+                }));
+            });
+        </script>
+
     </body>
-</html>
+
+    </html>
